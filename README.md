@@ -7,7 +7,7 @@ main.cpp - основной .cpp файл, содержит функцию main 
 
 ## Homework1 -- Проверка вывода. 
 
-## Homework2 -- Исчисления предикатов.
+## Homework2 -- Исчисление предикатов.
 Для запуска необходимы файлы: lemma_for_any_first, lemma_for_any_second, lemma_for_exist
 
 ## Homework3 -- Неравенства.
