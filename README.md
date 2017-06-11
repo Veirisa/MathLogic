@@ -1,9 +1,9 @@
 # MathLogic
 
 ## Во всех заданиях:
-input.txt - основной входной файл
-output.txt - выходной файл
-main.cpp - основной .cpp файл, содержит функцию main
+input.txt - основной входной файл <br>
+output.txt - выходной файл <br>
+main.cpp - основной .cpp файл, содержит функцию main <br>
 
 ## Homework1 -- Проверка вывода. 
 
