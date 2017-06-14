@@ -2,7 +2,8 @@
 #include <fstream>
 #include "expression.h"
 
-const string lemm_in[3] = {"lemma_for_any_first.txt",
+const string lemm_in[3] = {
+    "lemma_for_any_first.txt",
     "lemma_for_any_second.txt",
     "lemma_for_exist.txt"};
 vector<string> lemma;
