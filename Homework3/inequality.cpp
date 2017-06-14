@@ -13,7 +13,7 @@ void inequality::give_lemma(const string &name, string *const lemma) {
     fin.close();
 }
 
-void inequality::write_not_more_derivation() {
+void inequality::write_less_or_equal_derivation() {
     string a_s = "";
     for (size_t i = 0; i < a; ++i) {
         a_s += "'";
@@ -57,7 +57,7 @@ void inequality::write_not_more_derivation() {
     delete s_ptr;
 }
 
-void inequality::write_less_derivation() {
+void inequality::write_more_derivation() {
     string b_s = "";
     for (size_t i = 0; i < b; ++i) {
         b_s += "'";
@@ -87,9 +87,9 @@ void inequality::write_less_derivation() {
 
 void inequality::write_derivation() {
     if (a <= b) {
-        write_not_more_derivation();
+        write_less_or_equal_derivation();
     } else {
-        write_less_derivation();
+        write_more_derivation();
     }
 }
 
