@@ -3,8 +3,8 @@
 #include "expression.h"
 
 const string lemm_in[3] = {"lemma_for_any_first.txt",
-                           "lemma_for_any_second.txt",
-                           "lemma_for_exist.txt"};
+    "lemma_for_any_second.txt",
+    "lemma_for_exist.txt"};
 vector<string> lemma;
 vector<expression*> hypotheses;
 vector<expression*> derivations;
@@ -103,7 +103,9 @@ int main() {
                 add_lemma(i);
             }
             for (size_t i = 0; i < derivations.size(); ++i) {
-                cout << derivations[i]->change_derivation();
+                string* result_derivation = derivations[i]->change_derivation();
+                cout << *result_derivation;
+                delete result_derivation;
             }
         } else {
             cout << "|-" << answer->string_of_expr() << "\n";

@@ -31,7 +31,7 @@ void inequality::write_less_or_equal_derivation() {
     cout << "@a(a+0=a)->0" + a_s + "+0=0" + a_s + "\n";
     cout << "0" + a_s + "+0=0" + a_s + "\n";
     give_lemma("lemma_many_inc.txt", s_ptr);
-    string * changed_s_ptr = new string("");
+    string* changed_s_ptr = new string("");
     for (size_t i = 0; i < s_ptr->size(); ++i) {
         if (s_ptr->at(i) == 'A') {
             *changed_s_ptr += a_s;
@@ -69,7 +69,7 @@ void inequality::write_more_derivation() {
         a_s += "'";
     }
     cout << "|-!(?p(0'" + a_s + "+p=0" + b_s + "))" << "\n";
-    string * s_ptr = new string("");
+    string* s_ptr = new string("");
     give_lemma("lemma_def_add.txt", s_ptr);
     cout << *s_ptr;
     give_lemma("lemma_deMorgan.txt", s_ptr);

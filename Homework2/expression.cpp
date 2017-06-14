@@ -460,16 +460,16 @@ string expression::change_lemma(size_t num, const string &a, const string &b, co
     return res;
 }
 
-string expression::change_derivation() {
-    string res = "";
+string* expression::change_derivation() {
+    string* res = new string("");
     if (*this == *alpha) {
         string a = "(" + alpha->str + ")";
         string a_cons = a + "->" + a;
-        res += a + "->" + a_cons + "\n";
-        res += "(" + a + "->" + a_cons + ")" + "->" + "(" + a + "->" + "(" + a_cons + ")" + "->" + a + ")" + "->" + a_cons + "\n";
-        res += "(" + a + "->" + "(" + a_cons + ")" + "->" + a + ")" + "->" + a_cons + "\n";
-        res += a + "->" + "(" + a_cons + ")" + "->" + a + "\n";
-        res += a_cons + "\n";
+        *res += a + "->" + a_cons + "\n";
+        *res += "(" + a + "->" + a_cons + ")" + "->" + "(" + a + "->" + "(" + a_cons + ")" + "->" + a + ")" + "->" + a_cons + "\n";
+        *res += "(" + a + "->" + "(" + a_cons + ")" + "->" + a + ")" + "->" + a_cons + "\n";
+        *res += a + "->" + "(" + a_cons + ")" + "->" + a + "\n";
+        *res += a_cons + "\n";
         return res;
     }
     string a, b, c, j, i, i_j, j_i;
@@ -479,39 +479,39 @@ string expression::change_derivation() {
             j = a + "->" + der_expr->str;
             i = a + "->" + str;
             j_i = "(" + der_expr->str + ")->" + str;
-            res += "(" + j + ")" + "->" + "(" + a + "->" + j_i + ")" + "->" + i + "\n";
-            res += "(" + a + "->" + j_i + ")" + "->" + i + "\n";
-            res += i + "\n";
+            *res += "(" + j + ")" + "->" + "(" + a + "->" + j_i + ")" + "->" + i + "\n";
+            *res += "(" + a + "->" + j_i + ")" + "->" + i + "\n";
+            *res += i + "\n";
             return res;
         case ANY_DER:
             a = "(" + alpha->str + ")";
             b = "(" + left->str + ")";
             c = "(" + right->right->str + ")";
-            res += change_lemma(0, a, b, c);
+            *res += change_lemma(0, a, b, c);
             i_j = "(" + der_expr->str + ")";
             i = "(" + a + "&" + "(" + left->str + ")" + ")";
-            res += i + "->" + c + "\n";
+            *res += i + "->" + c + "\n";
             c = right->str;
-            res += i + "->" + "(" + c + ")" + "\n";
-            res += change_lemma(1, a, b, c);
-            res += a + "->" + str + "\n";
+            *res += i + "->" + "(" + c + ")" + "\n";
+            *res += change_lemma(1, a, b, c);
+            *res += a + "->" + str + "\n";
             return res;
         case EXIST_DER:
             a = "(" + alpha->str + ")";
             b = "(" + left->right->str + ")";
             c = "(" + right->str + ")";
-            res += change_lemma(2, a, b, c);
-            res += b + "->" + a + "->" + c + "\n";
+            *res += change_lemma(2, a, b, c);
+            *res += b + "->" + a + "->" + c + "\n";
             b = a;
             a = left->str;
-            res += "(" + a + ")" + "->" + b + "->" + c + "\n";
-            res += change_lemma(2, a, b, c);
-            res += b + "->" + str + "\n";
+            *res += "(" + a + ")" + "->" + b + "->" + c + "\n";
+            *res += change_lemma(2, a, b, c);
+            *res += b + "->" + str + "\n";
             return res;
         default:  //AXIOM_DER, HYPO_DER
-            res += str + "\n";
-            res += "(" + str + ")" + "->" + "(" + alpha->str + ")" + "->" + "(" + str + ")" + "\n";
-            res += "(" + alpha->str + ")" + "->" + "(" + str + ")" + "\n";
+            *res += str + "\n";
+            *res += "(" + str + ")" + "->" + "(" + alpha->str + ")" + "->" + "(" + str + ")" + "\n";
+            *res += "(" + alpha->str + ")" + "->" + "(" + str + ")" + "\n";
             return res;
     }
 }

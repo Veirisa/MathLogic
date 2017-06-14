@@ -59,7 +59,7 @@ public:
     bool check_exist();
     
     string string_of_expr();
-    string change_derivation();
+    string* change_derivation();
     
     friend bool operator==(const expression& a, const expression& b);
     friend bool operator!=(const expression& a, const expression& b);
