@@ -72,14 +72,14 @@ void expression::add_arguments(size_t index) {
 expression::expression() {
     lexem = EMPTY;
     derivation = EMPTY_DER;
-    left = right = mp_expr = nullptr;
+    left = right = der_expr = nullptr;
 }
 
 expression::expression(const string& s) {
     str = delete_spaces(s);
     int length = (int)str.length();
     derivation = EMPTY_DER;
-    mp_expr = nullptr;
+    der_expr = nullptr;
     if (check_operation(CONS, '-', 2, 0, 1)) {
         return;
     }
@@ -395,7 +395,7 @@ bool expression::check_MP() {
             for (size_t j = 0; j < derivations.size() - 1; ++j) {
                 if (*(derivations[j]) == *(expr->left))  {
                     derivation = MP_DER;
-                    mp_expr = derivations[j];
+                    der_expr = derivations[j];
                     return true;
                 }
             }
@@ -415,7 +415,7 @@ bool expression::check_any() {
         for (size_t i = 0; i < derivations.size() - 1; ++i) {
             if (derivations[i]->lexem == CONS && *(derivations[i]->left) == *left && *(derivations[i]->right) == *(right->right)) {
                 derivation = ANY_DER;
-                mp_expr = derivations[i];
+                der_expr = derivations[i];
                 return true;
             }
         }
@@ -433,7 +433,6 @@ bool expression::check_exist() {
         for (size_t i = 0; i < derivations.size() - 1; ++i) {
             if (derivations[i]->lexem == CONS && *(derivations[i]->right) == *right && *(derivations[i]->left) == *(left->right)) {
                 derivation = EXIST_DER;
-                mp_expr = derivations[i];
                 return true;
             }
         }
@@ -441,7 +440,7 @@ bool expression::check_exist() {
     return false;
 }
 
-string expression::change_lemma(size_t num, const string &a, const string &b, const string c) {
+string expression::change_lemma(size_t num, const string &a, const string &b, const string& c) {
     string res = "";
     for (size_t i = 0; i < lemma[num].size(); ++i) {
         switch (lemma[num][i]) {
@@ -477,9 +476,9 @@ string expression::change_derivation() {
     switch (derivation) {
         case MP_DER:
             a = "(" + alpha->str + ")";
-            j = a + "->" + mp_expr->str;
+            j = a + "->" + der_expr->str;
             i = a + "->" + str;
-            j_i = "(" + mp_expr->str + ")->" + str;
+            j_i = "(" + der_expr->str + ")->" + str;
             res += "(" + j + ")" + "->" + "(" + a + "->" + j_i + ")" + "->" + i + "\n";
             res += "(" + a + "->" + j_i + ")" + "->" + i + "\n";
             res += i + "\n";
@@ -489,7 +488,7 @@ string expression::change_derivation() {
             b = "(" + left->str + ")";
             c = "(" + right->right->str + ")";
             res += change_lemma(0, a, b, c);
-            i_j = "(" + mp_expr->str + ")";
+            i_j = "(" + der_expr->str + ")";
             i = "(" + a + "&" + "(" + left->str + ")" + ")";
             res += i + "->" + c + "\n";
             c = right->str;
