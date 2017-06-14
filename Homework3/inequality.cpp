@@ -39,7 +39,7 @@ void inequality::write_not_more_derivation() {
             *changed_s_ptr += s_ptr->at(i);
         }
     }
-    swap(*s_ptr, *changed_s_ptr);
+    swap(s_ptr, changed_s_ptr);
     delete changed_s_ptr;
     string inc = "";
     for (size_t i = 0; i < b - a; ++i) {
