@@ -45,7 +45,7 @@ class expression {
     bool is_free_to_substitution_in_quantifier_scheme(bool any_scheme);
     bool check_free_includings(expression* var, expression* expr);
     
-    string change_lemma(size_t num, const string &a, const string &b, const string& c);
+    void add_changed_lemma(string* res, size_t num, const string &a, const string &b, const string& c);
     
 public:
     

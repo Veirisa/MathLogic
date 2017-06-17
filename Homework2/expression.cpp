@@ -440,24 +440,22 @@ bool expression::check_exist() {
     return false;
 }
 
-string expression::change_lemma(size_t num, const string &a, const string &b, const string& c) {
-    string res = "";
+void expression::add_changed_lemma(string* res, size_t num, const string &a, const string &b, const string& c) {
     for (size_t i = 0; i < lemma[num].size(); ++i) {
         switch (lemma[num][i]) {
             case 'a':
-                res += a;
+                *res += a;
                 break;
             case 'b':
-                res += b;
+                *res += b;
                 break;
             case 'c':
-                res += c;
+                *res += c;
                 break;
             default:
-                res += lemma[num][i];
+                *res += lemma[num][i];
         }
     }
-    return res;
 }
 
 string* expression::change_derivation() {
@@ -487,25 +485,25 @@ string* expression::change_derivation() {
             a = "(" + alpha->str + ")";
             b = "(" + left->str + ")";
             c = "(" + right->right->str + ")";
-            *res += change_lemma(0, a, b, c);
+            add_changed_lemma(res, 0, a, b, c);
             i_j = "(" + der_expr->str + ")";
             i = "(" + a + "&" + "(" + left->str + ")" + ")";
             *res += i + "->" + c + "\n";
             c = right->str;
             *res += i + "->" + "(" + c + ")" + "\n";
-            *res += change_lemma(1, a, b, c);
+            add_changed_lemma(res, 1, a, b, c);
             *res += a + "->" + str + "\n";
             return res;
         case EXIST_DER:
             a = "(" + alpha->str + ")";
             b = "(" + left->right->str + ")";
             c = "(" + right->str + ")";
-            *res += change_lemma(2, a, b, c);
+            add_changed_lemma(res, 2, a, b, c);
             *res += b + "->" + a + "->" + c + "\n";
             b = a;
             a = left->str;
             *res += "(" + a + ")" + "->" + b + "->" + c + "\n";
-            *res += change_lemma(2, a, b, c);
+            add_changed_lemma(res, 2, a, b, c);
             *res += b + "->" + str + "\n";
             return res;
         default:  //AXIOM_DER, HYPO_DER
