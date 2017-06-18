@@ -28,9 +28,9 @@ class expression {
     vector<expression*> args;
     
     bool unary_lexem() const;
-    bool binary_lexem() const ;
-    bool name_lexem() const ;
-    bool quantifier_lexem() const ;
+    bool binary_lexem() const;
+    bool name_lexem() const;
+    bool quantifier_lexem() const;
     
     string delete_spaces(const string &s);
     size_t end_of_name(size_t index_var, char left, char right);

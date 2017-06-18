@@ -375,7 +375,6 @@ bool expression::check_axioms() {
         expression* expr = right;
         expression* quant = left->right;
         expression term;
-        string error;
         if (expr->was_free_substitution_of_term(left->left, quant->left, term) && term.lexem == ZERO && *(quant->right->left) == *expr) {
             term = expression();
             if (expr->was_free_substitution_of_term(quant->right->right, quant->left, term) && term.lexem == INC && *(term.left) == *(quant->left)) {
