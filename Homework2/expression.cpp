@@ -364,14 +364,14 @@ bool expression::check_hypotheses() {
 bool expression::check_axioms() {
     for (size_t i = 0; i < SIZE_AXIOMS - 1; ++i) {
         map<string, expression*> map;
-        if ((i < BORDER_AXIOMS && schemes_axioms[i]->expr_is_this_axiom(this, map)) //1 - 10
-            || (i >= BORDER_AXIOMS && *(schemes_axioms[i]) == *this) //10 - 20 (complete equals)
+        if ((i < BORDER_AXIOMS && schemes_axioms[i]->expr_is_this_axiom(this, map)) // 0 - 9
+            || (i >= BORDER_AXIOMS && *(schemes_axioms[i]) == *this) // 10 - 19 (complete equals)
             || ((i == BORDER_AXIOMS || i == BORDER_AXIOMS + 1) && is_free_to_substitution_in_quantifier_scheme(i == BORDER_AXIOMS))) { // 10-11
             derivation = AXIOM_DER;
             return true;
         }
     }
-    if (lexem == CONS && left->lexem == AND && left->right->lexem == ANY && left->right->right->lexem == CONS) {
+    if (lexem == CONS && left->lexem == AND && left->right->lexem == ANY && left->right->right->lexem == CONS) { // 20
         expression* expr = right;
         expression* quant = left->right;
         expression term;

@@ -86,7 +86,7 @@ inline string expression::string_of_expr() {
     return str;
 }
 
-const size_t SIZE_AXIOMS = 21;
+const size_t SIZE_AXIOMS = 20;
 const size_t BORDER_AXIOMS = 10;
 const vector<expression*> schemes_axioms = {
     new expression("a->b->a"), //0
@@ -110,8 +110,6 @@ const vector<expression*> schemes_axioms = {
     new expression("a+0=a"), //17
     new expression("a*0=0"), //18
     new expression("a*b'=a*b+a"), //19
-    //------------------------------
-    new expression("Y&@x(Y->Y)->Y") //20
 };
 
 #endif
