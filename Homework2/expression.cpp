@@ -362,7 +362,7 @@ bool expression::check_hypotheses() {
 }
 
 bool expression::check_axioms() {
-    for (size_t i = 0; i < SIZE_AXIOMS - 1; ++i) {
+    for (size_t i = 0; i < SIZE_AXIOMS; ++i) {
         map<string, expression*> map;
         if ((i < BORDER_AXIOMS && schemes_axioms[i]->expr_is_this_axiom(this, map)) // 0 - 9
             || (i >= BORDER_AXIOMS && *(schemes_axioms[i]) == *this) // 10 - 19 (complete equals)
