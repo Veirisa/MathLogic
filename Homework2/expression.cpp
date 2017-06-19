@@ -362,7 +362,7 @@ bool expression::check_hypotheses() {
 }
 
 bool expression::check_axioms() {
-    for (size_t i = 0; i < SIZE_AXIOMS; ++i) {
+    for (size_t i = 0; i < SIZE_AXIOMS - 1; ++i) {
         map<string, expression*> map;
         if ((i < BORDER_AXIOMS && schemes_axioms[i]->expr_is_this_axiom(this, map)) // 0 - 9
             || (i >= BORDER_AXIOMS && *(schemes_axioms[i]) == *this) // 10 - 19 (complete equals)
@@ -408,11 +408,11 @@ bool expression::check_any() {
     if (lexem == CONS && right->lexem == ANY) {
         expression* var = right->left;
         expression* expr = left;
-        if (!check_free_includings(var, expr)) {
-            return false;
-        }
         for (size_t i = 0; i < derivations.size() - 1; ++i) {
             if (derivations[i]->lexem == CONS && *(derivations[i]->left) == *left && *(derivations[i]->right) == *(right->right)) {
+                if (!check_free_includings(var, expr)) {
+                    return false;
+                }
                 derivation = ANY_DER;
                 der_expr = derivations[i];
                 return true;
@@ -426,11 +426,11 @@ bool expression::check_exist() {
     if (lexem == CONS && left->lexem == EXIST) {
         expression* var = left->left;
         expression* expr = right;
-        if (!check_free_includings(var, expr)) {
-            return false;
-        }
         for (size_t i = 0; i < derivations.size() - 1; ++i) {
             if (derivations[i]->lexem == CONS && *(derivations[i]->right) == *right && *(derivations[i]->left) == *(left->right)) {
+                if (!check_free_includings(var, expr)) {
+                    return false;
+                }
                 derivation = EXIST_DER;
                 return true;
             }
