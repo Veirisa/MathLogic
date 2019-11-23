@@ -1,5 +1,5 @@
 # MathLogic
 
-- Homework1: Проверка вывода.
-- Homework2: Исчисление предикатов.
-- Homework3: Неравенства.
+- Homework1: Verification.
+- Homework2: Complex verification (predicate calculus).
+- Homework3: Inequality.
